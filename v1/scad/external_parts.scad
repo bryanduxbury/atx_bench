@@ -39,8 +39,19 @@ module _atx_psu(depth=140) {
 }
 
 // TODO: model all the parts of the plug!
-module _barrel_jack() {
-  cylinder(r=6, h=10, center=true);
+module _binding_post() {
+  assign(total_h = 34)
+  assign(external_post_h = 12.4 + 1 + 7.3 + 1) 
+  assign(screw_len = total_h - external_post_h)
+  {
+    color("black")
+    translate([0, 0, external_post_h / 2]) 
+    cylinder(r=12.3/2, h=external_post_h, center=true);
+
+    color("silver")
+    translate([0, 0, -screw_len/2])
+    cylinder(r=5/32 * 25.4 / 2, h=screw_len, center=true, $fn=36);
+  }
 }
 
 module _lcd() {
@@ -77,4 +88,5 @@ module _rotary_encoder() {
 
 // _lcd();
 
-_atx_psu();
+// _atx_psu();
+_binding_post();
