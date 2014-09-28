@@ -8822,14 +8822,18 @@ www.pulseeng.com</description>
 </plain>
 <instances>
 <instance part="IC1" gate="A" x="111.76" y="73.66"/>
-<instance part="Q1" gate="G$1" x="149.86" y="83.82"/>
+<instance part="Q1" gate="G$1" x="149.86" y="83.82" smashed="yes">
+<attribute name="NAME" x="138.43" y="86.36" size="1.778" layer="95"/>
+</instance>
 <instance part="C1" gate="G$1" x="180.34" y="88.9"/>
 <instance part="D1" gate="G$1" x="175.26" y="91.44"/>
 <instance part="P+1" gate="1" x="134.62" y="99.06"/>
 <instance part="GND1" gate="1" x="180.34" y="81.28"/>
 <instance part="R2" gate="G$1" x="185.42" y="91.44" rot="R180"/>
 <instance part="R3" gate="G$1" x="190.5" y="66.04" rot="R90"/>
-<instance part="Q2" gate="G$1" x="185.42" y="38.1"/>
+<instance part="Q2" gate="G$1" x="185.42" y="38.1" smashed="yes">
+<attribute name="NAME" x="173.99" y="40.64" size="1.778" layer="95"/>
+</instance>
 <instance part="R4" gate="G$1" x="182.88" y="50.8" rot="R180"/>
 <instance part="R5" gate="G$1" x="167.64" y="35.56"/>
 <instance part="R6" gate="G$1" x="190.5" y="27.94" rot="R90"/>
