@@ -1,3 +1,4 @@
+use <./arduino.scad>
 
 module _atx_psu(depth=140) {
   color("silver")
@@ -39,12 +40,12 @@ module _atx_psu(depth=140) {
 }
 
 // TODO: model all the parts of the plug!
-module _binding_post() {
+module _binding_post(col = "black") {
   assign(total_h = 34)
   assign(external_post_h = 12.4 + 1 + 7.3 + 1) 
   assign(screw_len = total_h - external_post_h)
   {
-    color("black")
+    color(col)
     translate([0, 0, external_post_h / 2]) 
     cylinder(r=12.3/2, h=external_post_h, center=true);
 
@@ -83,10 +84,104 @@ module _standoff(dia, height) {
 }
 
 module _rotary_encoder() {
-  // TODO
+  color("black")
+  translate([0, 0, -5])
+  cube(size=[12.5, 13.2, 10], center=true);
+
+  color("gray") {
+    translate([0, 0, 2.5])
+    cylinder(r=7/2, h=5, center=true, $fn=36);
+  
+    translate([0, 0, 5 + 5]) 
+    difference() {
+      cylinder(r=6/2, h=10, center=true, $fn=36);
+      translate([0, 3, 5]) 
+      cube(size=[10, 3, 14], center=true);
+    }
+  }
+}
+
+module _frontend_pcba() {
+  translate([0, 0, 1.6/2]) 
+  color("green")
+  difference() {
+    cube(size=[100, 50, 1.6], center=true);
+    for (x=[-1,1],y=[-1,1]) {
+      translate([x * (50 - 2.5), y * (25 - 2.5), 0]) {
+        cylinder(r=3.1/2, h=10, center=true, $fn=12);
+      }
+    }
+  }
+  
+  color("gray")
+  for (x=[-1,1]) {
+    translate([x * 23, -11.5, 38.1/2 + 1.6]) {
+      cube(size=[41.6, 25, 38.1], center=true);
+    }
+  }
+  
+}
+
+module _mainboard_pcba() {
+  translate([0, 0, 1.6/2]) 
+  color("green")
+  difference() {
+    cube(size=[100, 80, 1.6], center=true);
+    for (x=[-1,1],y=[-1,1]) {
+      translate([x * (50 - 2.5), y * (40 - 2.5), 0]) {
+        cylinder(r=3.1/2, h=10, center=true, $fn=12);
+      }
+    }
+  }
+  
+  color("white")
+  translate([50 - 11, 0, 15/2 + 1.6]) {
+    cube(size=[22, 52, 15], center=true);
+  } 
+  
+  color("gray")
+  for (x=[-1,1]) {
+    translate([12.5 + x * 12.5, 40 - 5, 15/2+1.6]) {
+      cube(size=[20, 10, 15], center=true);
+    }
+  }
+  
+  translate([-50, -40 + 2100/1000 * 25.4, 15]) 
+  rotate([180, 0, 0])
+    translate([600 / 1000 * 25.4, 2 * 25.4, 0])  
+      Arduino(false, false, false);
+}
+
+module _80mm_fan() {
+  color("black") {
+    difference() {
+      cube(size=[80, 80, 25], center=true);
+      for (x=[-1,1],y=[-1,1]) {
+        translate([x * 71.5/2, y * 71.5/2, 0]) 
+        cylinder(r=4.4/2, h=30, center=true, $fn=36);
+      }
+    
+      intersection() {
+        cylinder(r=85/2, h=26, center=true);
+        cube(size=[76, 76, 30], center=true);
+      }
+    }
+  
+    cylinder(r=12, h=20, center=true);
+  }
+  
+  color("gray")
+  for (a=[0:8]) {
+    rotate([0, 0, a * 360/9]) 
+    translate([0, 17.5, 0]) rotate([0, 30, 0]) cube(size=[2, 35, 20], center=true);
+  }
+  
 }
 
 // _lcd();
-
 // _atx_psu();
-_binding_post();
+// _binding_post();
+// _frontend_pcba();
+// _mainboard_pcba();
+// _rotary_encoder();
+_80mm_fan();
