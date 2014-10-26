@@ -123,29 +123,31 @@ module _frontend_pcba() {
 }
 
 module _mainboard_pcba() {
-  translate([0, 0, 1.6/2]) 
-  color("green")
-  difference() {
-    cube(size=[100, 80, 1.6], center=true);
-    for (x=[-1,1],y=[-1,1]) {
-      translate([x * (50 - 2.5), y * (40 - 2.5), 0]) {
-        cylinder(r=3.1/2, h=10, center=true, $fn=12);
+  translate([450/1000*25.4, 0, 0]) {
+    translate([0, 0, 1.6/2]) 
+    color("green")
+    difference() {
+      cube(size=[100, 80, 1.6], center=true);
+      for (x=[-1,1],y=[-1,1]) {
+        translate([x * (50 - 2.5), y * (40 - 2.5), 0]) {
+          cylinder(r=3.1/2, h=10, center=true, $fn=12);
+        }
+      }
+    }
+  
+    color("white")
+    translate([50 - 11, 0, 15/2 + 1.6]) {
+      cube(size=[22, 52, 15], center=true);
+    } 
+  
+    color("gray")
+    for (x=[-1,1]) {
+      translate([12.5 + x * 12.5, 40 - 5, 15/2+1.6]) {
+        cube(size=[20, 10, 15], center=true);
       }
     }
   }
-  
-  color("white")
-  translate([50 - 11, 0, 15/2 + 1.6]) {
-    cube(size=[22, 52, 15], center=true);
-  } 
-  
-  color("gray")
-  for (x=[-1,1]) {
-    translate([12.5 + x * 12.5, 40 - 5, 15/2+1.6]) {
-      cube(size=[20, 10, 15], center=true);
-    }
-  }
-  
+
   translate([-50, -40 + 2100/1000 * 25.4, 15]) 
   rotate([180, 0, 0])
     translate([600 / 1000 * 25.4, 2 * 25.4, 0])  
